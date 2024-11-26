@@ -6,6 +6,7 @@ participantes
 
 - Germán Zeitz Lalanne
 - Jose Niguidula Enriquez
+- Thomaz Santos
 
 ## Modo de Colaboración
 
