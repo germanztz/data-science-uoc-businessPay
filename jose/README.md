@@ -35,8 +35,6 @@ _Proporcionar un código bien documentado que incluya la carga de datos, preproc
 
     Repositorio de entregables: <https://github.com/germanztz/data-science-uoc-businessPay.git>
 
-        - common.
-
 ## 2. **Informe del Análisis Exploratorio de Datos:**
 
 _Elaborar un informe detallado en formato markdown que resuma los hallazgos más importantes del EDA. Este informe debe incluir visualizaciones relevantes y conclusiones clave para facilitar la comprensión del conjunto de datos y sus principales características._
@@ -47,7 +45,7 @@ _Elaborar un informe detallado en formato markdown que resuma los hallazgos más
 
 ![outliers fees](outliers_fees.png)
 
-    - _Conclusiones: Existen Amounts de 200 en fees, pero nada indica que sean errores_
+    - Conclusiones: Fees con tarifa plana de 5$, existe filas con 10 en fees. Analisis indica que puedes ser un error.
 
 ### Valores request amount y fees
 
@@ -56,8 +54,7 @@ _Elaborar un informe detallado en formato markdown que resuma los hallazgos más
 ![fees](EDA_dist_fees.png)
 
   Existe 1 registro de fee con importe 'amount' a 10$ para un cash request de 50$. Es probablemente un error.
-  ¿porque count de 30000?
-
+  
 ## 3. **Informe del Análisis de Calidad de Datos:**
 
 _Documentar en formato markdown los resultados del análisis de calidad de los datos, identificando problemas encontrados (como valores faltantes o inconsistencias) y detallando las soluciones implementadas para garantizar la confiabilidad del análisis posterior._
@@ -112,9 +109,9 @@ _Documentar en formato markdown los resultados del análisis de calidad de los d
 
     - Varios reiteraciones sobre el mismo request_id : "Postpone Cash Request #request_id" rellenando columnas from_date y to_date.
 
-![Distinct reason](distinct_reason_counts.png)
-
 ![Distinct reason](distinct_reason_text.png)
+
+![Distinct reason](distinct_reason_distribution.png)
 
   Insights Accionables
 
@@ -122,7 +119,7 @@ _Documentar en formato markdown los resultados del análisis de calidad de los d
 
     - Estudiar el comportamiento de los cash_request_id con muchas iteraciones sobre fees sin llegar a cobrar (paid_at)
 
-    - Identificar los usuarios que requieren varios iteraciones antes de pagar los fees (y tambien a recibir el cahs request)
+    - Identificar los usuarios que requieren varios iteraciones antes de pagar los fees (y tambien a recibir el cash request)
 
   2. Status de cash request sin correspondiente entrada e fees
 
@@ -133,14 +130,21 @@ _Documentar en formato markdown los resultados del análisis de calidad de los d
   Insights Accionables
 
     - identificar usuarios que tienen más incidencias de rechazo en la petición de cash requests
-     
-
+    
 ## 4. **Modelos de Regresión Personalizados:**
 
 _Diseñar y optimizar modelos de regresión mediante la búsqueda sistemática de hiperparámetros. Se debe incluir un análisis de residuos y gráficos de dispersión que comparen los valores reales con las predicciones. Justificar las decisiones tomadas en la configuración de los hiperparámetros con base en analisis coherentes de los datos._
 
-    - regresón en el compartamiento de fees basado en usuario, cohorte de 'reasons', trimestre/epoca del año 
+![total fees](total_amount_regresion.png)
 
-## 5. **Presentación Ejecutiva y Repositorio de GitHub:**
+    - regresón en el compartamiento de fees basado en 'paid_at' y 'total_amount' 
 
-_Crear un informe resumido en formato markdown que resuma los hallazgos clave del análisis exploratorio y de calidad de datos, así como los insights obtenidos. Este informe debe estar diseñado para los stakeholders de Business Payments y presentarse con claridad y precisión técnica. Además, este documento será el archivo README del repositorio del proyecto, sirviendo como guía principal para quienes revisen el trabajo realizado.
+![clasificacion](user_clasificacion1.png)
+
+![clasificacion](user_clasificacion2.png)
+
+    - clasificación de usuarios basada en los parametros:
+    user_stats['ranking_score'] = (
+    0.5 * user_stats['total_fees_paid'] +
+    0.3 * user_stats['total_cash_request_amount'] +
+    0.2 * user_stats['transaction_count']
