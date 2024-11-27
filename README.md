@@ -56,7 +56,7 @@ _Documentar en formato markdown los resultados del análisis de calidad de los d
 
 **Análisis Cash Requests y Fees**
 
-![alt text](image.png)
+![alt text](images/image-24.png)
 
 #### Observaciones 
     - deleted_account_id y user_id tienen nulos complementarios, se pueden integrar en una sola columna
