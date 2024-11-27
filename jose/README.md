@@ -113,6 +113,12 @@ _Documentar en formato markdown los resultados del análisis de calidad de los d
 
 ![Distinct reason](distinct_reason_distribution.png)
 
+    - representación grafica de 'total_amount' en 'fees' donde 'paid_at' contiene valor. Se ve una subida entre los meses de  octubre a noviembre 2020, posiblemente por una regularización: alto numero de actualizaciones 'updated_at' en fees en octubre.
+
+![total_amount](total_amount_mensual.png)
+
+![fees updated](fees_updated_at.png)
+
   Insights Accionables
 
     - crear un agrupamiento de 'reasons' truncado a 22 posiciones e identificar lo cash_request_id que han dado mayor numero de interacciones antes de llegar a cobrar los fees
